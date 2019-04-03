@@ -1,0 +1,1473 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Basic\_bash}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\#
+
+Navigating the Unix Shell and Learning Basic Bash
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\section{Tutorial Outline}\label{tutorial-outline}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Getting ready
+\item
+  How to do it...
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Viewing working directory
+  \item
+    Listing folder contents
+  \item
+    Changing directories
+  \item
+    Relative and absolute paths
+  \item
+    File and folder manipulations
+  \item
+    Viewing text files
+  \item
+    grep
+  \item
+    pipes
+  \end{enumerate}
+\item
+  Basic Bash Scripting
+\item
+  Bash Variables
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Typing: Strings vs. Arithmetic
+  \item
+    Adding to your PATH
+  \item
+    Environment Variables and Arguments
+  \end{enumerate}
+\item
+  Conditional Control Flow
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    If/Elif/Else Statements
+  \item
+    Comparators
+  \item
+    For Loops
+  \end{enumerate}
+\item
+  Output to stdout vs. stderr
+\item
+  Theres more... ***
+\end{enumerate}
+
+Learning how to interact with the operating system using a command-line
+interface (or terminal) is a required skill in interactive computing and
+data analysis. We will use a command-line interface in many of the
+exercises through out this class. IPython and the Jupyter Notebook are
+typically launched from a terminal. Installing bioinformatics and Python
+packages are typically done from a terminal.
+
+In this exercise, we will show the very basics of the Unix shell, which
+is natively available in Linux distributions (such as Debian, Ubuntu,
+and so on) and macOS. On Windows 10, one can install the \textbf{Windows
+Subsystem for Linux}, a command-line interface to a Unix subsystem
+integrated with the Windows operating system (see
+https://docs.microsoft.com/windows/wsl/about).
+
+    \section{1. Getting ready}\label{getting-ready}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Here are the instructions to open a Unix shell on macOS, Linux, and
+Windows. bash is the most common Unix shell and this is what we will use
+when interacting with the remote server.
+
+On macOS, bring up the Spotlight Search, type \textbf{terminal}, and
+press Enter.
+
+On Windows, follow the instructions at
+https://docs.microsoft.com/en-us/windows/wsl/install-win10. Then, open
+the Windows menu, type \textbf{bash}, and press Enter.
+
+On Linux, open the Dash by clicking on the top-left icon on the desktop,
+type \textbf{terminal}, and open the \textbf{Terminal} application.
+
+    \begin{verbatim}
+<b>Tip:</b> If you want to run this notebook as bash <b>only</b> in Jupyter, you need to install <b>bash_kernel</b>, available at https://github.com/takluyver/bash_kernel. Open a terminal and type "pip install bash_kernel && python -m bash_kernel.install"
+\end{verbatim}
+
+This will install a bash kernel in Jupyter, and it will allow you to run
+this recipe's code directly in the Notebook.
+
+    \section{2. How to do it...}\label{how-to-do-it...}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+The Unix shell comes with hundreds of commands. We will see the most
+common ones in tutorial. In each of the code blocks we will be using the
+\textbf{\texttt{\%\%bash}} magic command and this will allow us to run
+bash code within the jupyter notebook without having to install the bash
+kernel. In addition, we can do one line bash commands using the
+\textbf{\texttt{!\textless{}cmd\textgreater{}}}, such as
+\textbf{\texttt{!pwd}}.
+
+\begin{verbatim}
+<b>Note:</b> If we are working directly in the terminal the magic commands should not be used.
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}lets list all magic commands to make sure we have access to the \PYZpc{}\PYZpc{}bash terminal from jupyter}
+        \PY{o}{\PYZpc{}}\PY{k}{lsmagic}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} Available line magics:
+        \%alias  \%alias\_magic  \%autocall  \%automagic  \%autosave  \%bookmark  \%cat  \%cd  \%clear  \%colors  \%config  \%connect\_info  \%cp  \%debug  \%dhist  \%dirs  \%doctest\_mode  \%ed  \%edit  \%env  \%gui  \%hist  \%history  \%killbgscripts  \%ldir  \%less  \%lf  \%lk  \%ll  \%load  \%load\_ext  \%loadpy  \%logoff  \%logon  \%logstart  \%logstate  \%logstop  \%ls  \%lsmagic  \%lx  \%macro  \%magic  \%man  \%matplotlib  \%mkdir  \%more  \%mv  \%notebook  \%page  \%pastebin  \%pdb  \%pdef  \%pdoc  \%pfile  \%pinfo  \%pinfo2  \%popd  \%pprint  \%precision  \%profile  \%prun  \%psearch  \%psource  \%pushd  \%pwd  \%pycat  \%pylab  \%qtconsole  \%quickref  \%recall  \%rehashx  \%reload\_ext  \%rep  \%rerun  \%reset  \%reset\_selective  \%rm  \%rmdir  \%run  \%save  \%sc  \%set\_env  \%store  \%sx  \%system  \%tb  \%time  \%timeit  \%unalias  \%unload\_ext  \%who  \%who\_ls  \%whos  \%xdel  \%xmode
+        
+        Available cell magics:
+        \%\%!  \%\%HTML  \%\%SVG  \%\%bash  \%\%capture  \%\%debug  \%\%file  \%\%html  \%\%javascript  \%\%js  \%\%latex  \%\%markdown  \%\%perl  \%\%prun  \%\%pypy  \%\%python  \%\%python2  \%\%python3  \%\%ruby  \%\%script  \%\%sh  \%\%svg  \%\%sx  \%\%system  \%\%time  \%\%timeit  \%\%writefile
+        
+        Automagic is ON, \% prefix IS NOT needed for line magics.
+\end{Verbatim}
+            
+    \textbf{A.} The terminal lets us write text commands with the keyboard.
+We execute them by pressing Enter, and the output is displayed below the
+command. The working directory is the directory of our file system that
+is currently "active" in the terminal. We can get the absolute path of
+the working directory as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PYZpc{}\PYZpc{}bash
+        
+        \PY{n+nb}{pwd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/WWU/biology/GenomeAnalysis/notebooks/Ex1\_bash
+
+    \end{Verbatim}
+
+    or
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{o}{!}pwd
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/WWU/biology/GenomeAnalysis/notebooks/Ex1\_bash
+
+    \end{Verbatim}
+
+    \textbf{B.} We can use the \textbf{\texttt{ls}} command to list all
+files and subdirectories in the working directory as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PYZpc{}\PYZpc{}bash
+        
+        ls \PYZti{}/GenomeAnalysis/
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+data
+notebooks
+
+    \end{Verbatim}
+
+    The \textbf{\texttt{-l}} option displays the directory contents as a
+detailed list, showing the permissions and owner of the files, the file
+sizes, and the last modified dates. Most shell commands come with many
+options that alter their behavior and that can be arbitrarily combined.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PYZpc{}\PYZpc{}bash
+        
+        ls \PYZhy{}l \PYZti{}/GenomeAnalysis/
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+total 8
+drwxrwxr-x 3 zinkgrm domain users 4096 Aug 30  2018 data
+drwxrwxr-x 8 zinkgrm domain users 4096 Mar  4 15:13 notebooks
+
+    \end{Verbatim}
+
+    \textbf{C.} We use the \textbf{\texttt{cd}} command to navigate between
+subdirectories. The current directory is named \textbf{\texttt{.}}
+(single dot), and the parent directory is named \textbf{\texttt{../}}
+(double dot):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PYZpc{}\PYZpc{}bash
+        
+        \PY{n+nb}{cd} data
+        
+        \PY{n+nb}{pwd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/WWU/biology/GenomeAnalysis/notebooks/Ex1\_bash/data
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nb}{cd} ../
+         
+         \PY{n+nb}{pwd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/WWU/biology/GenomeAnalysis/notebooks
+
+    \end{Verbatim}
+
+    \textbf{D.} Paths can be specified as relative (depending on a reference
+directory, generally the working directory) or absolute. The home
+directory, specified as \textbf{\texttt{\textasciitilde{}}}, contains
+the user's personal files. Configuration files are often stored in a
+directory like \textbf{\texttt{\textasciitilde{}/.program\_name}}. For
+example, \textbf{\texttt{\textasciitilde{}/.ipython}} contains
+configuration files of IPython:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PYZpc{}\PYZpc{}bash
+         
+         ls \PYZhy{}la \PYZti{}/.ipython
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+total 20
+drwxr-xr-x  5 zinkgrm domain users 4096 Aug 30  2018 .
+drwxr-xr-x 18 zinkgrm domain users 4096 Mar  1 11:56 ..
+drwxr-xr-x  2 zinkgrm domain users 4096 Aug 30  2018 extensions
+drwxr-xr-x  2 zinkgrm domain users 4096 Aug 30  2018 nbextensions
+drwxr-xr-x  7 zinkgrm domain users 4096 Mar  1 16:24 profile\_default
+
+    \end{Verbatim}
+
+    In most terminals, we can use the arrow keys on the keyboard to navigate
+in the history of past commands. Also, the Tab key enables tab
+completion, which automatically completes the first characters of a
+command or a file. For example, typing
+\textbf{\texttt{ls\ -la\ \textasciitilde{}/.ipy}} and pressing Tab would
+automatically complete to
+\textbf{\texttt{ls\ -la\ \textasciitilde{}/.ipython}}, or it would
+present the list of possible options if there are several files or
+directories that begin with \textbf{\texttt{\textasciitilde{}/.ipy}}.
+
+    \textbf{E.} We can create, move, rename, copy, delete files and
+directories from the terminal:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PYZpc{}\PYZpc{}bash
+         
+         ls
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Basic\_bash.ipynb
+basic.txt
+data
+HelloUser.sh
+helloworld.sh
+large.fasta
+medium.fasta
+printargs.sh
+small.fasta
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} update to new content \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} We create an empty directory:}
+         mkdir \PYZti{}/nb\PYZus{}files
+         
+         \PY{c+c1}{\PYZsh{} we check to see if it was made}
+         ls
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Basic\_bash.ipynb
+basic.txt
+data
+HelloUser.sh
+helloworld.sh
+large.fasta
+medium.fasta
+nb\_files
+printargs.sh
+small.fasta
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{} We copy all notebook files into the new directory:}
+         cp *.ipynb \PYZti{}/nb\PYZus{}files
+         
+         \PY{c+c1}{\PYZsh{} We rename the directory and check to see if it was renamed:}
+         mv \PYZti{}/nb\PYZus{}files \PYZti{}/notebook\PYZus{}files
+         ls
+         
+         \PY{c+c1}{\PYZsh{} We check what files are contained in the new directory:}
+         ls \PYZti{}/notebook\PYZus{}files
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Basic\_bash.ipynb
+basic.txt
+data
+HelloUser.sh
+helloworld.sh
+large.fasta
+medium.fasta
+notebook\_files
+printargs.sh
+small.fasta
+Basic\_bash.ipynb
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{}This command will fail because the folder is not empty}
+         rmdir \PYZti{}/notebook\PYZus{}files
+         
+         \PY{c+c1}{\PYZsh{} First remove files in the folder}
+         rm \PYZti{}/notebook\PYZus{}files/*
+         
+         \PY{c+c1}{\PYZsh{} Then remove folder}
+         rmdir \PYZti{}/notebook\PYZus{}files
+         
+         \PY{c+c1}{\PYZsh{} Check}
+         ls \PYZti{}/
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Basic\_bash.ipynb
+basic.txt
+data
+HelloUser.sh
+helloworld.sh
+large.fasta
+medium.fasta
+printargs.sh
+small.fasta
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+rmdir: failed to remove 'notebook\_files': Directory not empty
+
+    \end{Verbatim}
+
+    The \textbf{\texttt{rm}} command lets us delete files and directories.
+The \textbf{\texttt{rm\ -rf}} path deletes the given path recursively,
+even if subdirectories are not empty. It is an extremely dangerous
+command as it cannot be undone: the files are immediately and
+permanently deleted, they do not go into a trash directory first. See
+https://github.com/sindresorhus/guides/blob/master/how-not-to-rm-yourself.md
+for more details.
+
+    \textbf{F.} There are several useful commands to deal with text files:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{} Show the first three lines of a text file:}
+         head \PYZhy{}n \PY{l+m}{3} basic.txt
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hi 
+this 
+is test file 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{} Show the last line of a text file:}
+         tail \PYZhy{}n \PY{l+m}{1} basic.txt
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ABCD EFG
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{} We display some text:}
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}Hello world!\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello world!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{} We redirect the output of a command to}
+         \PY{c+c1}{\PYZsh{} a text file with `\PYZgt{}`:}
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}Hello world!\PYZdq{}} \PYZgt{} myfile.txt
+         \PY{c+c1}{\PYZsh{} We display the entire contents of the file:}
+         cat myfile.txt
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello world!
+
+    \end{Verbatim}
+
+    \textbf{G.} The grep command lets us search substrings in text and is an
+acronym for ``Global Regular Expression Print''. Now let's go on to some
+practical examples of using grep. To better understand the results, I've
+created a simple text file \textbf{\texttt{basic.txt}} on which we will
+run our grep searches; the file contains the following lines:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{o}{!}head basic.txt
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hi 
+this 
+is test file 
+to carry out few regular expressions 
+practical with grep 
+123 456 
+Abcd
+ABCD EFG
+    \end{Verbatim}
+
+    We can do a case-insensitive search using the \textbf{\texttt{-i}}
+option:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PYZpc{}\PYZpc{}bash
+         
+         grep \PYZhy{}i \PY{l+s+s1}{\PYZsq{}abcd\PYZsq{}} basic.txt
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Abcd
+ABCD EFG
+
+    \end{Verbatim}
+
+    \begin{verbatim}
+<b>Note:</b> By default grep prints the results of the entire line. To restrict the print to the search pattern, add the __`-o`__ option.
+\end{verbatim}
+
+We can count the number of occurances of a match by using the
+\textbf{\texttt{-c}} option:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PYZpc{}\PYZpc{}bash
+         
+         grep \PYZhy{}c \PY{l+s+s1}{\PYZsq{}is\PYZsq{}} basic.txt
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+
+    \end{Verbatim}
+
+    We can use the \textbf{\texttt{-Eo}} option to find all instances that
+match, test followed by a word (using regular expressions):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PYZpc{}\PYZpc{}bash
+         
+         grep \PYZhy{}Eo \PY{l+s+s2}{\PYZdq{}test \PYZbs{}w+\PYZdq{}} basic.txt
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+test file
+
+    \end{Verbatim}
+
+    \textbf{H.} A major strength of the Unix shell is that commands can be
+combined with pipes: the output of one command can be directly
+transferred to the input of another command:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}This is a Unix shell\PYZdq{}} \PY{p}{|} grep \PYZhy{}Eo \PY{l+s+s2}{\PYZdq{}Unix \PYZbs{}w+\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Unix shell
+
+    \end{Verbatim}
+
+    \subsection{3. Basic Bash Scripting}\label{basic-bash-scripting}
+
+What we have been doing so far is single operations per command line.
+Next, we are going to see how to combine multiple operations and some
+programming logic to build small scripts to perform basic utilities.
+https://www.usna.edu/Users/cs/aviv/classes/ic221/s17/lab/02/lab.html
+
+    \subsubsection{Hello World}\label{hello-world}
+
+    Scripting is synonymous with programming --- it is programming ---
+except it's generally considered more light weight. For the scripts
+we'll write in this class, the commands will be stored in a file, but
+that file is interpreted by the bash shell. That means each line
+actually runs like a sequence of command lines executed in the order
+they apear in the file as if they were typed onto the command line.
+
+You must indicate that you wish for the your script to be treated as
+such by designating which program should be interpreting the command
+lines. To make that designation, we use a shabang symbol
+\textbf{\texttt{\#!}} symbol followed by the path to a program. For this
+section, that program is going to be bash, namely the shell. To find out
+the path we can use the command \textbf{\texttt{which\ bash}}.
+
+Next, we want to write our first program using a text editor
+(\textbf{\texttt{nano}}), namely to print "Hello World," so let's take a
+look at that first.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PYZpc{}\PYZpc{}bash
+         
+         less helloworld.sh
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\#!/bin/bash
+
+echo "Hello World"  \# This is a comment
+
+
+    \end{Verbatim}
+
+    You can find the script helloworld.sh in the examples folder in the lab
+directory. By convention, all bash scripts, or shell scripts, have a
+file type \textbf{.sh}, and we will use that convention in this class.
+
+On line 1, there is the shebang tells the shell what programming
+language to use to interpret the code, such as bash.
+
+On line 3, there is the actual command to print to standard out, "Hello
+World", as well as a comment, anything following a "\#". The echo
+command echoes back anything it is given to stdout, in this case, the
+string "Hello World."
+
+    Several command-line text editors are available, such as
+\textbf{\texttt{pico}}, \textbf{\texttt{nano}}, or \textbf{\texttt{vi}}.
+Learning these text editors requires time and effort, especially vi. One
+of the most user friendly text editors is \textbf{\texttt{nano}}. From a
+terminal, create a script in your home directory
+\textbf{\texttt{nano\ \textasciitilde{}/helloworld.sh}}. We will go
+through a tutorial about how to use nano and and the associated
+keystrokes to navigate. To open a terminal, go the the Jupyter home
+screen and select New -\textgreater{} Terminal. This will open a new
+page with a bash cammand line terminal.
+
+Next, you have to make the file executable using \textbf{\texttt{chmod}}
+before we can execute the program. You will notice in the
+\textbf{\texttt{ls\ -l}} output that the file now has x associated with
+the permissions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PYZpc{}\PYZpc{}bash 
+        
+        chmod +x \PYZti{}/helloworld.sh
+        
+        ls \PYZhy{}l \PYZti{}/helloworld.sh \PY{c+c1}{\PYZsh{}\PYZsh{} Make sure this file shows up in your home directory or you will get an error}
+\end{Verbatim}
+
+
+    Now you are ready to execute with
+\textbf{\texttt{\textasciitilde{}/helloworld.sh}} or
+\textbf{\texttt{bash\ \textasciitilde{}/helloworld.sh}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PYZpc{}\PYZpc{}bash
+        
+        \PYZti{}/helloworld.sh
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello World
+
+    \end{Verbatim}
+
+    \subsection{4. Bash Variables}\label{bash-variables}
+
+You can assign variables in bash just like in other programming
+languages, but you refer to variables using a \$ symbol. Note that
+spacing is important, the assignment must occur immediately following
+the equal sign. If there are spaces in the string value, use quotes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nv}{name}\PY{o}{=}matt
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Your name is }\PY{n+nv}{\PYZdl{}name}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Your name is matt
+
+    \end{Verbatim}
+
+    Information can also be captured from the stdout of a program using
+\$(...). The below example uses \textbf{\texttt{wc}} with the
+\textbf{\texttt{-l}} option to count the number of lines in the file.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nv}{count}\PY{o}{=}\PY{k}{\PYZdl{}(}wc \PYZhy{}l \PYZlt{} large.fasta\PY{k}{)}
+         
+         \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}count}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+111259
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nv}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}Matt Zink\PYZdq{}}
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Your name is }\PY{n+nv}{\PYZdl{}name}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Your name is Matt Zink
+
+    \end{Verbatim}
+
+    Finally, variable replacement, that is substituting a variable for its
+value, occurs throughout a script, including in quotes, like above.
+
+    \subsection{A. Typing: Strings vs.
+Arithmetic}\label{a.-typing-strings-vs.-arithmetic}
+
+One major difference between bash, which is a scripting language, and R
+or python, is that it is not strongly typed. That means, you don't need
+to identify the type of the data you're storing to a variable. Instead,
+you have to provide some context for how you want the data to be
+interpreted, otherwise, by default, it will be treated like strings and
++ is concatenation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nv}{n}\PY{o}{=}\PY{l+m}{1}
+         \PY{n+nv}{n}\PY{o}{=}\PY{l+m}{1}+\PY{n+nv}{\PYZdl{}n}
+         \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}n}   \PY{c+c1}{\PYZsh{}\PYZlt{}\PYZhy{}\PYZhy{} print \PYZdq{}1+1\PYZdq{} not 2!}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1+1
+
+    \end{Verbatim}
+
+    To peform arithmetic operations, you use the \textbf{\texttt{let}}
+operations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nv}{n}\PY{o}{=}\PY{l+m}{1}
+         \PY{n+nb}{let} \PY{n+nv}{n}\PY{o}{=}\PY{l+m}{1}+\PY{n+nv}{\PYZdl{}n} \PY{c+c1}{\PYZsh{}\PYZlt{}\PYZhy{}\PYZhy{} use quotes if you need white space}
+         \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}n}   \PY{c+c1}{\PYZsh{}\PYZlt{}\PYZhy{}\PYZhy{} prints 2!}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+
+    \end{Verbatim}
+
+    There is also no such things as floats in bash. Everything is a numeric
+integer.
+
+    \subsection{B. Adding to your PATH}\label{b.-adding-to-your-path}
+
+As you develop new tools for this class, you would like to be able to
+call on them directly, like you do other commmand line tools. To do
+this, those scripts/programs need to exist on the \$PATH.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{} see what \PYZdl{}HOME and \PYZdl{}PATH are set to}
+         \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}HOME}
+         \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}PATH}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/WWU/pollard
+/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/anaconda3/bin
+
+    \end{Verbatim}
+
+    The standard, Unix way to do this, is to create a directory in your home
+folder called \textbf{\texttt{\textasciitilde{}/bin}} and place all
+newly create commands there. Unfortunately, your bin directory may not
+be on the search path yet. To add it, you have to update the enviroment
+variable PATH. The PATH can be permanently updated by modifying the PATH
+line in the file called \texttt{.bashrc} using a text editor, such as
+\textbf{\texttt{nano}}.
+
+    \begin{verbatim}
+<b>Note:</b> When specifying a PATH, the folders are seperated by _`:`_.
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PYZpc{}\PYZpc{}bash
+        
+        mkdir \PYZti{}/bin  \PY{c+c1}{\PYZsh{}create bin folder}
+        mv \PYZti{}/helloworld.sh \PYZti{}/bin/   \PY{c+c1}{\PYZsh{}mv script to the new folder}
+        
+        \PY{n+nb}{export} \PY{n+nv}{PATH}\PY{o}{=}\PY{n+nv}{\PYZdl{}HOME}/bin:\PY{n+nv}{\PYZdl{}PATH}   \PY{c+c1}{\PYZsh{}modify your path to include the \PYZdl{}HOME/bin:}
+        \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}PATH}
+\end{Verbatim}
+
+
+    This will place \textbf{\texttt{\textasciitilde{}/bin}} at the start of
+the search path while preserving prior values on the path. The export
+command sets the assignment globally, across all scripts and programs
+that are to be run from the shell.
+
+    \subsection{C. Environment Variables and
+Arguments}\label{c.-environment-variables-and-arguments}
+
+In a bash script, and in bash shells in general, there are a number of
+environment variables available for convenience. Once such environment
+variable we've seen previously is the PATH variable:
+
+By convention all environment variables are upper case. Below are some
+really useful ones to know:
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+Variable & Description\tabularnewline
+\midrule
+\endhead
+\$USER & the current user\tabularnewline
+\$HOME & the home directory\tabularnewline
+\$PWD & The current working directory\tabularnewline
+\$SHELL & The name of the shell you are currently running\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nb}{echo} \PY{n+nv}{\PYZdl{}PWD}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/WWU/biology/GenomeAnalysis/notebooks/Ex1\_bash
+
+    \end{Verbatim}
+
+    For example, this program \textbf{\texttt{HelloUser.sh}} prints a
+helpful message
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{}look at the script}
+         less HelloUser.sh
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\#!/bin/bash
+
+echo "Hello \$USER!"
+echo "You are currently here: \$PWD"
+echo "But, your home directory here: \$HOME"
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{}execute the script}
+         bash HelloUser.sh
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello pollard!
+You are currently here: /home/WWU/biology/GenomeAnalysis/notebooks/Ex1\_bash
+But, your home directory here: /home/WWU/pollard
+
+    \end{Verbatim}
+
+    Additionally, there are environment variables for arguments passed to
+the shell script. These are \texttt{\$0}, \texttt{\$1}, \texttt{\$2},
+etc, where the number refers to the command line argument. For example,
+consider the script, \textbf{\texttt{printargs.sh}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PYZpc{}\PYZpc{}bash
+         
+         less printargs.sh
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\#!/bin/bash                                                                                                        
+
+echo "arg 0: \$0"
+echo "arg 1: \$1"
+echo "arg 2: \$2"
+echo "arg 3: \$3"
+echo "arg 4: \$4"
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{c+c1}{\PYZsh{}args   0         1 2 3 4}
+         \PY{c+c1}{\PYZsh{}       |         | | | |}
+         bash printargs.sh x y z
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+arg 0: printargs.sh
+arg 1: x
+arg 2: y
+arg 3: z
+arg 4: 
+
+    \end{Verbatim}
+
+    Argument 0 always refers to the script, and each \texttt{\$1} refers to
+the arguments to the script. The script prints the first 4 arguments,
+but there isn't a fourth argument. \texttt{\$4} is treated as the empty
+string.
+
+    To refer to all arguments, not including \texttt{\$0}, use \texttt{\$*}.
+\texttt{\$\#} is special variable set to the number of arguments. Try
+adding the following code to the \textbf{\texttt{printargs.sh}} script.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{n+nv}{\PYZdl{}\PYZsh{}}\PY{l+s+s2}{ number of args}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Arguments \PYZus{}not\PYZus{} including the name of the script: }\PY{n+nv}{\PYZdl{}*}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0 number of args
+Arguments \_not\_ including the name of the script: 
+
+    \end{Verbatim}
+
+    \subsection{5. Conditional Control Flow}\label{conditional-control-flow}
+
+Like any reasonable programming environment, you want to do more than
+just print things out in an iterative fashion. We need a mechanism to
+change the program based on some condition, like if/else statements and
+looping.
+
+\subsubsection{A. If/Elif/Else
+Statements}\label{a.-ifelifelse-statements}
+
+The format of an if statement is like so:
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{if} \KeywordTok{cmd}
+\KeywordTok{then} 
+    \KeywordTok{cmd}
+\KeywordTok{elif} \KeywordTok{cmd}
+\KeywordTok{then}
+    \KeywordTok{cmd}
+\KeywordTok{else}
+    \KeywordTok{cmd}  
+\KeywordTok{fi}        \CommentTok{#<-- close off the if statemet with fi}
+\end{Highlighting}
+\end{Shaded}
+
+    The \texttt{if\ cmd} part proceeds if the cmd succeeds, that is, it
+doesn't have exit with failure. In general, the cmd used in \texttt{if}
+blocks and others are the {[} {]} which checks conditions. With the {[}
+{]} you can do simple comparators and other operations. Here is a an
+examples script that checks if the script was run from the home
+directory:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello }\PY{n+nv}{\PYZdl{}USER}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}HOME} \PY{o}{=}\PY{o}{=} \PY{n+nv}{\PYZdl{}PWD} \PY{o}{]}
+         \PY{k}{then}
+             \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Good, you\PYZsq{}re in your home directory: }\PY{n+nv}{\PYZdl{}HOME}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{else}
+             \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}What are you doing away from home?!?\PYZdq{}}
+         
+             \PY{n+nb}{cd} \PY{n+nv}{\PYZdl{}HOME}
+         
+             \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Now you are in your home directory: }\PY{n+nv}{\PYZdl{}PWD}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{fi}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello pollard
+What are you doing away from home?!?
+Now you are in your home directory: /home/WWU/pollard
+
+    \end{Verbatim}
+
+    There are two things of note here. First, the
+\texttt{{[}\ \$HOME\ ==\ \$PWD\ {]}} is a logical command that succeeds
+only when \texttt{\$HOME} is the present working directory. Also, when
+you change directories within a script, you are not changing the
+directory of the shell you ran the script from, just the present working
+directory of the script itself.
+
+    \subsubsection{B. Comparators}\label{b.-comparators}
+
+Conditions in bash exist within brackets, {[} {]}, but the {[} {]} is
+actually a command that returns true if the conditions were met. For
+string comparators, you can use \texttt{=} and \texttt{!} but for
+numerics, you need to use options to the {[} {]} command. See below for
+the varied usages.
+
+    \begin{verbatim}
+<b>Note:</b> Remember when we create variables in bash, we create then by __`var=value`__ and when the variable is recalled or used, we use __`$var`__.
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PYZpc{}\PYZpc{}bash
+        
+        \PY{c+c1}{\PYZsh{}string                                                                                                            }
+        \PY{n+nv}{var}\PY{o}{=}adam
+        \PY{n+nv}{user}\PY{o}{=}Matt
+        \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}user} \PY{o}{=} \PY{n+nv}{\PYZdl{}var} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{string }\PY{n+nv}{\PYZdl{}user}\PY{l+s+s2}{ equals }\PY{n+nv}{\PYZdl{}var}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}user} \PY{o}{=}\PY{o}{=} \PY{n+nv}{\PYZdl{}var} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{string }\PY{n+nv}{\PYZdl{}user}\PY{l+s+s2}{ equals }\PY{n+nv}{\PYZdl{}var}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}user} !\PY{o}{=} \PY{n+nv}{\PYZdl{}var} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{string }\PY{n+nv}{\PYZdl{}user}\PY{l+s+s2}{ does not equal }\PY{n+nv}{\PYZdl{}var}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}z \PY{n+nv}{\PYZdl{}user} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{string }\PY{n+nv}{\PYZdl{}user}\PY{l+s+s2}{ is empty!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}n \PY{n+nv}{\PYZdl{}user} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{string }\PY{n+nv}{\PYZdl{}user}\PY{l+s+s2}{ is not empty!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{;} \PY{k}{fi}
+        
+        \PY{c+c1}{\PYZsh{}numeric                                                                                                           }
+        \PY{n+nv}{a}\PY{o}{=}\PY{l+m}{1}
+        \PY{n+nv}{b}\PY{o}{=}\PY{l+m}{2}
+        \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}a} \PYZhy{}eq \PY{n+nv}{\PYZdl{}b} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{number }\PY{n+nv}{\PYZdl{}b}\PY{l+s+s2}{ equals }\PY{n+nv}{\PYZdl{}a}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}a} \PYZhy{}ne \PY{n+nv}{\PYZdl{}b} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{number }\PY{n+nv}{\PYZdl{}b}\PY{l+s+s2}{ does not equal }\PY{n+nv}{\PYZdl{}a}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}a} \PYZhy{}gt \PY{n+nv}{\PYZdl{}b} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}a}\PY{l+s+s2}{ is greater than }\PY{n+nv}{\PYZdl{}b}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}a} \PYZhy{}lt \PY{n+nv}{\PYZdl{}b} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}a}\PY{l+s+s2}{ is less than }\PY{n+nv}{\PYZdl{}b}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        
+        \PY{c+c1}{\PYZsh{}file/dir properties }
+        \PY{n+nv}{file}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}basic.txt\PYZdq{}}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}d \PY{n+nv}{\PYZdl{}file} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}file}\PY{l+s+s2}{ exists and is a directory!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}e \PY{n+nv}{\PYZdl{}file} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}file}\PY{l+s+s2}{ exists!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}f \PY{n+nv}{\PYZdl{}file} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}file}\PY{l+s+s2}{ exists and is not a directory!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}r \PY{n+nv}{\PYZdl{}file} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}file}\PY{l+s+s2}{ exists and is readable!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}s \PY{n+nv}{\PYZdl{}file} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}file}\PY{l+s+s2}{ exists and has size greater than zero!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}w \PY{n+nv}{\PYZdl{}file} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}file}\PY{l+s+s2}{ exists and is writable!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        \PY{k}{if} \PY{o}{[} \PYZhy{}x \PY{n+nv}{\PYZdl{}file} \PY{o}{]} \PY{p}{;} \PY{k}{then} \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}file}\PY{l+s+s2}{ exists and is executable!}\PY{l+s+s2}{\PYZdq{}} \PY{p}{;} \PY{k}{fi}
+        
+        \PY{c+c1}{\PYZsh{} NOTE: Since everything\PYZsq{}s on the same line, I need ;s between                                                     }
+        \PY{c+c1}{\PYZsh{} the if and the then and between the then and the fi.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+string Matt does not equal adam
+string Matt is not empty!
+number 2 does not equal 1
+1 is less than 2
+basic.txt exists!
+basic.txt exists and is not a directory!
+basic.txt exists and is readable!
+basic.txt exists and has size greater than zero!
+basic.txt exists and is writable!
+basic.txt exists and is executable!
+
+    \end{Verbatim}
+
+    Additionally, you can use the standard set of conditional operators:
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{if [} \OtherTok{$condition1}\KeywordTok{ ]} \KeywordTok{|| [} \OtherTok{$condition2}\KeywordTok{ ]} \NormalTok{; }\KeywordTok{do} \KeywordTok{echo} \StringTok{"either condition1 or condition2 are true"}\KeywordTok{;} \KeywordTok{done}
+\KeywordTok{if [} \OtherTok{$condition1}\KeywordTok{ ]} \KeywordTok{&& [} \OtherTok{$condition2}\KeywordTok{ ]} \NormalTok{; }\KeywordTok{do} \KeywordTok{echo} \StringTok{"condition1 and condition2 are true"}\KeywordTok{;} \KeywordTok{done}
+\KeywordTok{if [} \OtherTok{!} \OtherTok{$condition1}\KeywordTok{ ]} \NormalTok{; }\KeywordTok{do} \KeywordTok{echo} \StringTok{"condtion1 is not true"}\KeywordTok{;} \KeywordTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+    \subsubsection{C. For Loops}\label{c.-for-loops}
+
+A for loop has a similar structure as in R and for loops iterate for
+each item provided:
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{for} \KeywordTok{var} \NormalTok{in str1 str2 .. strn}
+\KeywordTok{do}
+   \CommentTok{# commands}
+   \CommentTok{# $var is available for references, set to str1 -> strn in each loop}
+\KeywordTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{k}{for} i in \PY{l+m}{1} \PY{l+m}{2} \PY{l+m}{3} \PY{l+m}{4} a b c
+         \PY{k}{do}
+             \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item: }\PY{n+nv}{\PYZdl{}i}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{done}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Item: 1
+Item: 2
+Item: 3
+Item: 4
+Item: a
+Item: b
+Item: c
+
+    \end{Verbatim}
+
+    \subsection{6. Output to stdout vs.
+stderr}\label{output-to-stdout-vs.-stderr}
+
+A bash script is just like other command line tools we've seen so far
+with respect to output and input. The same standard file names and file
+descriptor numbers are automatically provided as well as the ability to
+redirect them.
+
+When you put a command in a script that writes to standard out, like say
+head or cat command, the output will also be part of the standard output
+of the script, just like echo was above. Similarly, if a command has an
+error and writes to standard error, that will also be a part of the
+script's standard error.
+
+If you want to write to standard error directly in your script, you will
+redirect the output of the echo command.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}ERROR: Something bad happened\PYZdq{}}        \PY{c+c1}{\PYZsh{}\PYZlt{}\PYZhy{}\PYZhy{} direct to stdout}
+         
+         \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}ERROR: Something bad happened\PYZdq{}}  \PY{l+m}{1}\PYZgt{}\PY{p}{\PYZam{}}\PY{l+m}{2}  \PY{c+c1}{\PYZsh{}\PYZlt{}\PYZhy{}\PYZhy{} redirect file descriptor 1 to 2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ERROR: Something bad happened
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ERROR: Something bad happened
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PYZpc{}\PYZpc{}bash
+         
+         \PY{n+nv}{H}\PY{o}{=}\PY{l+m}{8}
+         
+         \PY{k}{if} \PY{o}{[} \PY{n+nv}{\PYZdl{}H} \PY{o}{=}\PY{o}{=} \PY{l+m}{10} \PY{o}{]}
+         \PY{k}{then}
+             \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}The equality is TRUE\PYZdq{}}
+         \PY{k}{else}
+             \PY{n+nb}{echo} \PY{l+s+s2}{\PYZdq{}ERROR: The equality is FALSE\PYZdq{}} \PY{l+m}{1}\PYZgt{}\PY{p}{\PYZam{}}\PY{l+m}{2}
+         \PY{k}{fi}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ERROR: The equality is FALSE
+
+    \end{Verbatim}
+
+    \subsection{7. There's more...}\label{theres-more...}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+We only scratched the surface of the Unix shell in this exercise. There
+are many other commands that can be combined in an infinite number of
+ways. Many repetitive tasks that would take hours of manual work can be
+done in a few minutes by writing the appropriate commands. Mastering the
+Unix shell may take a lot of effort, but it leads to dramatic time gains
+in the long term.
+
+Here are a few references:
+
+\begin{itemize}
+\tightlist
+\item
+  Linux tutorial at https://ryanstutorials.net/linuxtutorial/
+\item
+  Bash commands at https://ss64.com/bash/
+\item
+  Learn Bash in Y minutes, at https://learnxinyminutes.com/docs/bash/
+\item
+  Learn the shell interactively, at http://www.learnshell.org/
+\item
+  The fish shell, at https://fishshell.com/
+\item
+  xonsh, a Python-powered shell, at http://xon.sh/
+\item
+  Windows Subsystem for Linux, at
+  https://docs.microsoft.com/windows/wsl/about
+\end{itemize}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+This tutorial was adapted from
+https://ipython-books.github.io/21-learning-the-basics-of-the-unix-shell/
+***
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

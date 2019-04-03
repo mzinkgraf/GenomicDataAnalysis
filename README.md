@@ -1,5 +1,5 @@
 <div style="text-align:center">
-# GenomicDataAnalysis
+<h1>GenomicDataAnalysis</h1>
 </div>
 
 ## BIOL497R

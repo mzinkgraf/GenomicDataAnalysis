@@ -1,7 +1,7 @@
-<p style="text-align: center;">
-# GenomicDataAnalysis
-</p>
 
+# GenomicDataAnalysis
+
+<h3 style="text-align: center;" markdown="1">This is a level 3 heading.</h3>
 
 ## BIOL497R
 

@@ -1,6 +1,4 @@
-<div style="text-align:center">
-<h1>GenomicDataAnalysis</h1>
-</div>
+# >GenomicDataAnalysis
 
 ## BIOL497R
 

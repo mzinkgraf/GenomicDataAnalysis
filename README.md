@@ -1,6 +1,4 @@
-# >GenomicDataAnalysis
-
-<span style="display:block;text-align:center"><h1>Test</h1></span>
+# GenomicDataAnalysis
 
 ## BIOL497R
 

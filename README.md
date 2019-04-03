@@ -1,4 +1,7 @@
-# <p style="text-align: center;">GenomicDataAnalysis</p>
+<p style="text-align: center;">
+# GenomicDataAnalysis
+</p>
+
 
 ## BIOL497R
 
